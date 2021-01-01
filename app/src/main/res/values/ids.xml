@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="rvSabjiList" type="id" />
+    <item name="tvVarietyName" type="id" />
+    <item name="tvVarietyCost" type="id" />
+    <item name="tvVarietyApproxCost" type="id" />
+    <item name="tvDateOfArrival" type="id" />
+    <item name="tvMarketName" type="id" />
+    <item name="tvLocation" type="id" />
+</resources>
