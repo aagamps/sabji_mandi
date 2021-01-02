@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sabji_mandi">
         <activity
-            android:name=".ScrollingActivity"
+            android:name=".activities.ScrollingActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Sabji_mandi.NoActionBar">
             <intent-filter>

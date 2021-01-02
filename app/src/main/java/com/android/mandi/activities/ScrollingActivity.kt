@@ -1,13 +1,11 @@
-package com.android.mandi
+package com.android.mandi.activities
 
 import android.os.Bundle
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_scrolling.*
+import com.android.mandi.R
 
 class ScrollingActivity : AppCompatActivity() {
 
