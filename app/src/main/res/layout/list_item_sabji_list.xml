@@ -45,7 +45,7 @@
                 android:textColor="@color/darkGray"
                 android:textSize="@dimen/_10sdp"
                 android:textStyle="bold"
-                tools:text="(1800-2200)" />
+                tools:text="(1800\/2200)" />
 
         </RelativeLayout>
 

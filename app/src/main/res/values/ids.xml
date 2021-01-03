@@ -7,4 +7,9 @@
     <item name="tvDateOfArrival" type="id" />
     <item name="tvMarketName" type="id" />
     <item name="tvLocation" type="id" />
+    <item name="tapToRetryView" type="id" />
+    <item name="tapToRetryImage" type="id" />
+    <item name="tapToRetryMessage" type="id" />
+    <item name="progressBarView" type="id" />
+    <item name="progressBar" type="id" />
 </resources>

@@ -9,6 +9,7 @@ buildscript {
     ext.swipe_refresh_version = '1.1.0'
     ext.material_version = '1.1.0-beta01'
     ext.intuit_version = '1.0.5'
+    ext.dagger_version = '2.25.2'
 
 
     repositories {
