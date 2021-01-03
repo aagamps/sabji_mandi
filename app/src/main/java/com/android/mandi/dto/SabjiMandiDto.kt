@@ -1,5 +1,8 @@
 package com.android.mandi.dto
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.android.mandi.Constants.TABLE_SABJI_VERIATY
 import com.google.gson.annotations.SerializedName
 
 object SabjiMandiDto {
@@ -27,9 +30,11 @@ object SabjiMandiDto {
         @SerializedName("target_bucket") var targetBucket: Map<String, String>? = null,
         @SerializedName("field") var fields: List<Field>? = null,
         @SerializedName("records") var records: List<Record>? = null
-        )
+    )
 
+    @Entity(tableName = TABLE_SABJI_VERIATY)
     data class Record(
+        @PrimaryKey(autoGenerate = true) var id: Int = 0,
         @SerializedName("timestamp") var timestamp: String? = null,
         @SerializedName("state") var state: String? = null,
         @SerializedName("district") var district: String? = null,
