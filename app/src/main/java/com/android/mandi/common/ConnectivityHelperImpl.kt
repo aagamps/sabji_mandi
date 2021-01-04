@@ -1,8 +1,9 @@
-package com.kredily.app.dependency.common
+package com.android.mandi.common
 
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import com.kredily.app.dependency.common.ConnectivityHelper
 import javax.inject.Inject
 
 /**
@@ -11,7 +12,8 @@ import javax.inject.Inject
  *
  * @author Ketan Patel
  */
-class ConnectivityHelperImpl @Inject constructor(private val connectivityManager : ConnectivityManager) : ConnectivityHelper {
+class ConnectivityHelperImpl @Inject constructor(private val connectivityManager : ConnectivityManager) :
+    ConnectivityHelper {
     
     /**
      * Check if there is any internet connectivity
