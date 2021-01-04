@@ -2,7 +2,7 @@ package com.android.mandi.dto
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.android.mandi.Constants.TABLE_SABJI_VERIATY
+import com.android.mandi.constants.TABLE_SABJI_VERIATY
 import com.google.gson.annotations.SerializedName
 
 object SabjiMandiDto {

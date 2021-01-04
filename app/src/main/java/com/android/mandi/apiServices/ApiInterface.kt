@@ -1,4 +1,4 @@
-package com.android.mandi.ApiServices
+package com.android.mandi.apiServices
 
 import com.android.mandi.dto.SabjiMandiDto
 import io.reactivex.Single

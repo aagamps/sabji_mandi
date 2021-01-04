@@ -1,10 +1,10 @@
-package com.android.mandi.Database
+package com.android.mandi.database
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.android.mandi.Constants.TABLE_SABJI_VERIATY
+import com.android.mandi.constants.TABLE_SABJI_VERIATY
 import com.android.mandi.dto.SabjiMandiDto
 
 @Dao

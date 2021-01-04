@@ -6,10 +6,10 @@ import android.content.Context
 import android.content.res.Resources
 import android.net.ConnectivityManager
 import androidx.room.Room
-import com.android.mandi.Constants.DB_NAME
-import com.android.mandi.Database.DbService
-import com.android.mandi.Database.DbServiceImpl
-import com.android.mandi.Database.SabjiMandiDatabase
+import com.android.mandi.constants.DB_NAME
+import com.android.mandi.database.DbService
+import com.android.mandi.database.DbServiceImpl
+import com.android.mandi.database.SabjiMandiDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

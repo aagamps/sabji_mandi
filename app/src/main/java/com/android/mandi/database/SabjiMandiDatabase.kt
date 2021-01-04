@@ -1,4 +1,4 @@
-package com.android.mandi.Database
+package com.android.mandi.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

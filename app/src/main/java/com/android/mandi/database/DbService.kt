@@ -1,4 +1,4 @@
-package com.android.mandi.Database
+package com.android.mandi.database
 
 import com.android.mandi.dto.SabjiMandiDto
 import io.reactivex.Completable

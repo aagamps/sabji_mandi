@@ -1,8 +1,8 @@
 package com.android.mandi.modules
 
 import com.android.mandi.BuildConfig
-import com.android.mandi.Constants.BASE_URL
-import com.android.mandi.Constants.REQUEST_TIMEOUT
+import com.android.mandi.constants.BASE_URL
+import com.android.mandi.constants.REQUEST_TIMEOUT
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module

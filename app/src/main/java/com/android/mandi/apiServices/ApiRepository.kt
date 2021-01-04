@@ -1,6 +1,6 @@
-package com.android.mandi.ApiServices
+package com.android.mandi.apiServices
 
-import com.android.mandi.Database.DbService
+import com.android.mandi.database.DbService
 import com.android.mandi.dto.SabjiMandiDto
 import com.android.mandi.modules.IoScheduler
 import com.android.mandi.modules.MainScheduler
