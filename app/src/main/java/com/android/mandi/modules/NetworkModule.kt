@@ -1,6 +1,7 @@
 package com.android.mandi.modules
 
 import com.android.mandi.BuildConfig
+import com.android.mandi.apiServices.ApiInterface
 import com.android.mandi.constants.BASE_URL
 import com.android.mandi.constants.REQUEST_TIMEOUT
 import com.google.gson.Gson
@@ -50,6 +51,10 @@ class NetworkModule {
         })
         .addInterceptor(interceptor)
         .build()
+
+    @Provides
+    @Singleton
+    fun provideApiService(retrofit : Retrofit) : ApiInterface = retrofit.create(ApiInterface::class.java)
     
     @Provides
     @Singleton

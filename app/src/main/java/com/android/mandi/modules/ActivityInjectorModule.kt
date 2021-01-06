@@ -1,11 +1,13 @@
 package com.android.mandi.modules
 
+import androidx.lifecycle.ViewModelProvider
 import com.android.mandi.activities.ScrollingActivity
+import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class ActivityInjectorModule {
+internal abstract class ActivityInjectorModule {
     
     @ContributesAndroidInjector
     abstract fun bindScrollingActivity() : ScrollingActivity

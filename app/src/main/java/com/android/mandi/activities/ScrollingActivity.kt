@@ -8,24 +8,36 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.android.mandi.R
+import com.android.mandi.model.ScrollingModel
 import com.android.mandi.viewModel.ScrollingViewModel
+import com.android.mandi.viewModel.ScrollingViewModelImpl
 import javax.inject.Inject
 
-@Inject
-lateinit var viewModelFactory: ViewModelProvider.Factory
-private lateinit var viewModel: ScrollingViewModel
 
 class ScrollingActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private lateinit var viewModel: ScrollingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scrolling)
+        getAssociatedViewModel()
         setSupportActionBar(findViewById(R.id.toolbar))
         findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = title
+        viewModel.getSabjiMandiList()
+    }
 
-
+    private fun getAssociatedViewModel() {
+        viewModel =
+            ViewModelProviders.of(this, viewModelFactory).get(ScrollingViewModelImpl::class.java)
+        viewModel.bindModel(ScrollingModel())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -34,9 +46,7 @@ class ScrollingActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
-        return super.onCreateView(name, context, attrs)
-    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
