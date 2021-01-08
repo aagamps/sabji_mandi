@@ -36,18 +36,24 @@ class ScrollingViewModelImpl @Inject constructor(private val apiRepository: ApiR
         return _loaderWithProgress
     }
 
-    override fun showSabjiMadiList(): LiveData<SabjiMandiDto.Response> {
-        TODO("Not yet implemented")
+    private val _sabjiMandiData = MutableLiveData<SabjiMandiDto.Response>()
+    override fun showSabjiMadidata(): LiveData<SabjiMandiDto.Response> {
+        return _sabjiMandiData
     }
 
     override fun getSabjiMandiList() {
         if (connectivityHelper.isConnected()) {
-            _loader.value = true
             apiRepository.getSabjiMandidata()
                 .subscribe(object : NetworkObserver<SabjiMandiDto.Response>() {
                     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
                     override fun onSucceed(response: SabjiMandiDto.Response) {
-                        val json = gson.toJson(response)
+                        _sabjiMandiData.value = response
+                        if (response.records != null) {
+                            apiRepository.deleteSabjiList()
+                            apiRepository.insertSabjiList(response.records!!)
+                        }
+                        val rec = apiRepository.getSabjiList()
+                        val aac = apiRepository.getSabjiList()
                     }
 
                     override fun onFailure(
@@ -57,12 +63,10 @@ class ScrollingViewModelImpl @Inject constructor(private val apiRepository: ApiR
                         throwable: Throwable
                     ) {
                         _message.value = errorMessage
-                        _loader.value = false
                     }
                 })
 
         } else {
-            _loader.value = false
             _message.value = "No Internet Connection.."
         }
     }

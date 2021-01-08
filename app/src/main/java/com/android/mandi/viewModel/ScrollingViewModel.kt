@@ -16,7 +16,7 @@ interface ScrollingViewModel {
 
     fun showHideLoaderWithProgress(): LiveData<Boolean>
 
-    fun showSabjiMadiList(): LiveData<SabjiMandiDto.Response>
+    fun showSabjiMadidata(): LiveData<SabjiMandiDto.Response>
 
     fun getSabjiMandiList()
 

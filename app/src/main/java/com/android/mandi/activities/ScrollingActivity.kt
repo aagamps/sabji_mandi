@@ -1,37 +1,49 @@
 package com.android.mandi.activities
 
-import android.content.Context
 import android.os.Bundle
-import android.util.AttributeSet
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import androidx.databinding.DataBindingUtil
+import androidx.core.view.ViewCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.mandi.R
+import com.android.mandi.adapters.SabjiAdapter
+import com.android.mandi.dto.SabjiMandiDto
 import com.android.mandi.model.ScrollingModel
 import com.android.mandi.viewModel.ScrollingViewModel
 import com.android.mandi.viewModel.ScrollingViewModelImpl
+import dagger.android.support.DaggerAppCompatActivity
+import kotlinx.android.synthetic.main.content_scrolling.*
 import javax.inject.Inject
 
 
-class ScrollingActivity : AppCompatActivity() {
+class ScrollingActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var viewModel: ScrollingViewModel
+    private lateinit var adapter: SabjiAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scrolling)
         getAssociatedViewModel()
-        setSupportActionBar(findViewById(R.id.toolbar))
-        findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = title
-        viewModel.getSabjiMandiList()
+//        setSupportActionBar(findViewById(R.id.toolbar))
+//        findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = title
+
+        adapter = SabjiAdapter()
+        setUpRecyclerView()
+        swipeToRefreshView.setOnRefreshListener(this)
+        swipeToRefreshView.post {
+            onRefresh()
+        }
+        viewModel.showSabjiMadidata().observe(this, sabjiMandiDataObserver)
+
     }
 
     private fun getAssociatedViewModel() {
@@ -47,7 +59,6 @@ class ScrollingActivity : AppCompatActivity() {
     }
 
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -58,4 +69,31 @@ class ScrollingActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    private fun setUpRecyclerView() {
+        rvSabjiList.setHasFixedSize(true)
+        rvSabjiList.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvSabjiList.adapter = adapter
+        ViewCompat.setNestedScrollingEnabled(rvSabjiList, false)
+    }
+
+    private val sabjiMandiDataObserver = Observer<SabjiMandiDto.Response> { response ->
+
+        val recordsList = response.records
+        if (recordsList != null) {
+            for ((index, meeting) in recordsList.withIndex()) {
+                val taskItem = SabjiAdapter.SabjiRecord(index.toLong(), meeting)
+                adapter.addRecyclerViewItem(taskItem)
+            }
+            adapter.notifyDataSetChanged()
+        }
+        swipeToRefreshView.isRefreshing = false
+    }
+
+    override fun onRefresh() {
+        swipeToRefreshView.isRefreshing = true
+        viewModel.getSabjiMandiList()
+    }
+
 }

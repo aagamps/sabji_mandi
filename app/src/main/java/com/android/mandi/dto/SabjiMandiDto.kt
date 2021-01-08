@@ -25,8 +25,8 @@ object SabjiMandiDto {
         @SerializedName("visualizable") var visualizable: String? = null,
         @SerializedName("created") var created: Int? = null,
         @SerializedName("updated") var updated: Int? = null,
-        @SerializedName("created_date") var createdDate: Int? = null,
-        @SerializedName("updated_date") var updatedDate: Int? = null,
+        @SerializedName("created_date") var createdDate: String? = null,
+        @SerializedName("updated_date") var updatedDate: String? = null,
         @SerializedName("target_bucket") var targetBucket: Map<String, String>? = null,
         @SerializedName("field") var fields: List<Field>? = null,
         @SerializedName("records") var records: List<Record>? = null

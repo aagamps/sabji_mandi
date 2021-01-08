@@ -12,4 +12,5 @@
     <item name="tapToRetryMessage" type="id" />
     <item name="progressBarView" type="id" />
     <item name="progressBar" type="id" />
+    <item name="swipeToRefreshView" type="id" />
 </resources>
