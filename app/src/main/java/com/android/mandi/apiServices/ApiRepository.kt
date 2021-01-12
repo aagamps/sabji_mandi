@@ -30,6 +30,10 @@ class ApiRepository @Inject constructor(
         return dbService.getSabjiList().compose(applySchedulersSingle())
     }
 
+    internal fun getLocationList(): Single<List<String>> {
+        return dbService.getLocationList().compose(applySchedulersSingle())
+    }
+
     internal fun deleteSabjiList(): Completable {
         return dbService.deleteSabjiList()
     }

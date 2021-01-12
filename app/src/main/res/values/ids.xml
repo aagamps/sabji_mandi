@@ -13,4 +13,19 @@
     <item name="progressBarView" type="id" />
     <item name="progressBar" type="id" />
     <item name="swipeToRefreshView" type="id" />
+    <item name="tvHeader" type="id" />
+    <item name="bottomSheet" type="id" />
+    <item name="btnClose" type="id" />
+    <item name="viewPager" type="id" />
+    <item name="tabLayout" type="id" />
+    <item name="upperLayout" type="id" />
+    <item name="middleLayout" type="id" />
+    <item name="rvLocation" type="id" />
+    <item name="sortingLayout" type="id" />
+    <item name="rbLTH" type="id" />
+    <item name="rbHTL" type="id" />
+    <item name="rbOTL" type="id" />
+    <item name="rbLTO" type="id" />
+    <item name="rbgDate" type="id" />
+    <item name="rbgPrice" type="id" />
 </resources>

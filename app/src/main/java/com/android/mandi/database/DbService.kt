@@ -12,4 +12,6 @@ interface DbService {
 
     fun deleteSabjiList(): Completable
 
+    fun getLocationList(): Single<List<String>>
+
 }

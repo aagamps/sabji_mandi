@@ -12,4 +12,5 @@
     <color name="gray">#F0F0F0</color>
     <color name="darkGray">#8C202843</color>
     <color name="transparent">#00000000</color>
+    <color name="errorRed">#b20000</color>
 </resources>

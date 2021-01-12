@@ -44,7 +44,8 @@ object SabjiMandiDto {
         @SerializedName("arrival_date") var arrivalDate: String? = null,
         @SerializedName("min_price") var minPrice: String? = null,
         @SerializedName("max_price") var maxPrice: String? = null,
-        @SerializedName("modal_price") var modalPrice: String? = null
+        @SerializedName("modal_price") var modalPrice: String? = null,
+        var location: String? = null
     )
 
 }

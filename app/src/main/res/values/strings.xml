@@ -91,4 +91,15 @@
     </string>
     <string name="action_settings">Settings</string>
     <string name="arrival">Arrival:</string>
+    <string name="filter">Filter</string>
+    <string name="location">Location</string>
+    <string name="sort_by">Sort By</string>
+    <string name="cancel">Cancel</string>
+    <string name="apply">Apply</string>
+    <string name="price">Price</string>
+    <string name="lowerToHigher">Lower To Higher</string>
+    <string name="higherToLower">Higher To Lower</string>
+    <string name="date">Date</string>
+    <string name="oldestToLatest">Oldest To Latest</string>
+    <string name="latestToOldest">Latest To Oldest</string>
 </resources>

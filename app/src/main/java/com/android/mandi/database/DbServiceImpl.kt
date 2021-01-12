@@ -1,5 +1,6 @@
 package com.android.mandi.database
 
+import android.util.Log
 import com.android.mandi.dto.SabjiMandiDto
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -23,8 +24,8 @@ class DbServiceImpl constructor(database: SabjiMandiDatabase) : DbService {
     override fun getSabjiList(): Single<List<SabjiMandiDto.Record>> {
         return Single.create { emitter ->
             try {
-                val flags = dao.getSabjiList()
-                emitter.onSuccess(flags)
+                val list = dao.getSabjiList()
+                emitter.onSuccess(list)
             } catch (exception: java.lang.Exception) {
                 emitter.onError(exception)
             }
@@ -36,6 +37,17 @@ class DbServiceImpl constructor(database: SabjiMandiDatabase) : DbService {
             try {
                 dao.deleteSabjiList()
                 emitter.onComplete()
+            } catch (exception: java.lang.Exception) {
+                emitter.onError(exception)
+            }
+        }
+    }
+
+    override fun getLocationList(): Single<List<String>> {
+        return Single.create { emitter ->
+            try {
+                val list = dao.getLocationList()
+                emitter.onSuccess(list)
             } catch (exception: java.lang.Exception) {
                 emitter.onError(exception)
             }

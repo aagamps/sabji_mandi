@@ -10,14 +10,19 @@ interface ScrollingViewModel {
 
     fun getBoundModel(): ScrollingModel?
 
-    fun showHideLoader() : LiveData<Boolean>
+    fun showHideLoader(): LiveData<Boolean>
 
-    fun showMessage() : LiveData<String>
+    fun showMessage(): LiveData<String>
 
     fun showHideLoaderWithProgress(): LiveData<Boolean>
 
+    fun getSabjiMandiNetworkData()
     fun showSabjiMadidata(): LiveData<SabjiMandiDto.Response>
 
     fun getSabjiMandiList()
+    fun showSabjiMadiList(): LiveData<List<SabjiMandiDto.Record>>
+
+    fun getLocationList()
+    fun showLocationList(): LiveData<List<String>>
 
 }

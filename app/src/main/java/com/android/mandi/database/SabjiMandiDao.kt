@@ -18,4 +18,7 @@ interface SabjiMandiDao {
 
     @Query("DELETE FROM $TABLE_SABJI_VERIATY")
     fun deleteSabjiList()
+
+    @Query("SELECT location FROM $TABLE_SABJI_VERIATY")
+    fun getLocationList(): List<String>
 }

@@ -17,6 +17,7 @@ import com.android.mandi.model.ScrollingModel
 import com.android.mandi.viewModel.ScrollingViewModel
 import com.android.mandi.viewModel.ScrollingViewModelImpl
 import dagger.android.support.DaggerAppCompatActivity
+import kotlinx.android.synthetic.main.activity_scrolling.*
 import kotlinx.android.synthetic.main.content_scrolling.*
 import javax.inject.Inject
 
@@ -33,8 +34,6 @@ class ScrollingActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefres
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scrolling)
         getAssociatedViewModel()
-//        setSupportActionBar(findViewById(R.id.toolbar))
-//        findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = title
 
         adapter = SabjiAdapter()
         setUpRecyclerView()
@@ -43,6 +42,7 @@ class ScrollingActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefres
             onRefresh()
         }
         viewModel.showSabjiMadidata().observe(this, sabjiMandiDataObserver)
+        viewModel.showMessage().observe(this, messageObserver)
 
     }
 
@@ -83,17 +83,23 @@ class ScrollingActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefres
         val recordsList = response.records
         if (recordsList != null) {
             for ((index, meeting) in recordsList.withIndex()) {
+                meeting.location = "${meeting.district}, ${meeting.state}"
                 val taskItem = SabjiAdapter.SabjiRecord(index.toLong(), meeting)
                 adapter.addRecyclerViewItem(taskItem)
             }
             adapter.notifyDataSetChanged()
         }
+        viewModel.getLocationList()
+        swipeToRefreshView.isRefreshing = false
+    }
+
+    private val messageObserver = Observer<String> { message ->
         swipeToRefreshView.isRefreshing = false
     }
 
     override fun onRefresh() {
         swipeToRefreshView.isRefreshing = true
-        viewModel.getSabjiMandiList()
+        viewModel.getSabjiMandiNetworkData()
     }
 
 }

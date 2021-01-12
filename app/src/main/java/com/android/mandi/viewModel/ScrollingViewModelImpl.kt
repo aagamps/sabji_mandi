@@ -41,19 +41,37 @@ class ScrollingViewModelImpl @Inject constructor(private val apiRepository: ApiR
         return _sabjiMandiData
     }
 
-    override fun getSabjiMandiList() {
+    private val _sabjiMandiList = MutableLiveData<List<SabjiMandiDto.Record>>()
+    override fun showSabjiMadiList(): LiveData<List<SabjiMandiDto.Record>> {
+        return _sabjiMandiList
+    }
+
+    private val _locationList = MutableLiveData<List<String>>()
+    override fun showLocationList(): LiveData<List<String>> {
+        return _locationList
+    }
+
+    override fun getSabjiMandiNetworkData() {
         if (connectivityHelper.isConnected()) {
             apiRepository.getSabjiMandidata()
                 .subscribe(object : NetworkObserver<SabjiMandiDto.Response>() {
                     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
                     override fun onSucceed(response: SabjiMandiDto.Response) {
                         _sabjiMandiData.value = response
+
                         if (response.records != null) {
-                            apiRepository.deleteSabjiList()
                             apiRepository.insertSabjiList(response.records!!)
+                                .subscribe(object : NetworkObserver<Void>() {
+                                    override fun onCompleted() = Unit
+
+                                    override fun onFailure(
+                                        errorCode: Int?,
+                                        status: String?,
+                                        errorMessage: String,
+                                        throwable: Throwable
+                                    ) = Unit
+                                })
                         }
-                        val rec = apiRepository.getSabjiList()
-                        val aac = apiRepository.getSabjiList()
                     }
 
                     override fun onFailure(
@@ -67,8 +85,47 @@ class ScrollingViewModelImpl @Inject constructor(private val apiRepository: ApiR
                 })
 
         } else {
-            _message.value = "No Internet Connection.."
+            _message.value = "Internet is not available.."
         }
+    }
+
+    override fun getSabjiMandiList() {
+        apiRepository.getSabjiList()
+            .subscribe(object : NetworkObserver<List<SabjiMandiDto.Record>>() {
+                @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+                override fun onSucceed(response: List<SabjiMandiDto.Record>) {
+                    _sabjiMandiList.value = response
+                }
+
+                override fun onFailure(
+                    errorCode: Int?,
+                    status: String?,
+                    errorMessage: String,
+                    throwable: Throwable
+                ) {
+                    _message.value = errorMessage
+                }
+            })
+    }
+
+    override fun getLocationList() {
+        apiRepository.getLocationList()
+            .subscribe(object : NetworkObserver<List<String>>() {
+                @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+                override fun onSucceed(response: List<String>) {
+                    _locationList.value = response
+                }
+
+                override fun onFailure(
+                    errorCode: Int?,
+                    status: String?,
+                    errorMessage: String,
+                    throwable: Throwable
+                ) {
+                    _message.value = errorMessage
+                }
+            })
+
     }
 }
 
