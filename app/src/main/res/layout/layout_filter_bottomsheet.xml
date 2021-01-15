@@ -23,8 +23,9 @@
                 android:layout_weight="1"
                 android:background="@drawable/left_ovel_background"
                 android:text="@string/location"
+                android:textColor="@color/darkGray"
                 android:textStyle="bold"
-                app:backgroundTint="@color/teal_700" />
+                app:backgroundTint="@color/gray" />
 
             <com.google.android.material.button.MaterialButton
                 android:layout_width="match_parent"
@@ -32,9 +33,9 @@
                 android:layout_weight="1"
                 android:background="@drawable/right_ovel_background"
                 android:text="@string/sort_by"
-                android:textColor="@color/darkGray"
+                android:textColor="@color/white"
                 android:textStyle="bold"
-                app:backgroundTint="@color/gray" />
+                app:backgroundTint="@color/teal_700" />
 
         </LinearLayout>
 
@@ -59,7 +60,8 @@
                 android:id="@id/sortingLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="visible">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"

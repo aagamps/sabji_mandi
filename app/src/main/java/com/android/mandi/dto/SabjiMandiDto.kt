@@ -48,4 +48,9 @@ object SabjiMandiDto {
         var location: String? = null
     )
 
+    data class Location(
+        var name: String? = null,
+        var isSelected: Boolean = false
+    )
+
 }

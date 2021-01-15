@@ -17,7 +17,7 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<BaseRecyclerViewAd
         private const val LIST_ITEM_TAP_RETRY = -10001
     }
 
-    protected var recyclerViewItems = mutableListOf<RecyclerViewItem>()
+    private var recyclerViewItems = mutableListOf<RecyclerViewItem>()
     private var recyclerViewItemClickListener: RecyclerViewItemClickListener? = null
     private var recyclerViewLItemLongClickListener: RecyclerViewItemLongClickListener? = null
 

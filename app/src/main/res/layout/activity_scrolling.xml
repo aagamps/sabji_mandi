@@ -26,6 +26,18 @@
             android:background="@drawable/ovel_background">
 
             <TextView
+                android:id="@id/tvError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ovel_background"
+                android:backgroundTint="@color/errorRed"
+                android:gravity="center"
+                android:padding="@dimen/_5sdp"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                tools:text="No Internet Connection..." />
+
+            <TextView
                 android:id="@id/tvHeader"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_180sdp"
@@ -38,35 +50,37 @@
                 android:textSize="@dimen/_30ssp" />
 
             <ImageView
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
+                android:id="@id/ivFliter"
+                android:layout_width="@dimen/_23sdp"
+                android:layout_height="@dimen/_23sdp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_30sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
+                android:visibility="gone"
                 android:src="@drawable/ic_filter_symbol" />
         </RelativeLayout>
 
         <include layout="@layout/content_scrolling" />
 
-        <RelativeLayout
-            android:id="@id/bottomSheet"
-            style="?attr/bottomSheetStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/top_ovel_background"
-            android:backgroundTint="@color/gray"
-            android:paddingBottom="0dp"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+        <!--        <RelativeLayout-->
+        <!--            android:id="@id/bottomSheet"-->
+        <!--            style="?attr/bottomSheetStyle"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@drawable/top_ovel_background"-->
+        <!--            android:backgroundTint="@color/gray"-->
+        <!--            android:paddingBottom="0dp"-->
+        <!--            android:focusable="true"-->
+        <!--            android:focusableInTouchMode="true"-->
+        <!--            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">-->
 
-            <include
-                layout="@layout/layout_filter_bottomsheet"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="visible" />
+        <!--            <include-->
+        <!--                layout="@layout/layout_filter_bottomsheet"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:visibility="visible" />-->
 
-        </RelativeLayout>
+        <!--        </RelativeLayout>-->
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

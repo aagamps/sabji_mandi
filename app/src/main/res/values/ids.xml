@@ -28,4 +28,7 @@
     <item name="rbLTO" type="id" />
     <item name="rbgDate" type="id" />
     <item name="rbgPrice" type="id" />
+    <item name="cbLocation" type="id" />
+    <item name="ivFliter" type="id" />
+    <item name="tvError" type="id" />
 </resources>

@@ -53,12 +53,13 @@ class ScrollingViewModelImpl @Inject constructor(private val apiRepository: ApiR
 
     override fun getSabjiMandiNetworkData() {
         if (connectivityHelper.isConnected()) {
+            _loader.value = true
             apiRepository.getSabjiMandidata()
                 .subscribe(object : NetworkObserver<SabjiMandiDto.Response>() {
                     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
                     override fun onSucceed(response: SabjiMandiDto.Response) {
                         _sabjiMandiData.value = response
-
+                        _loader.value = false
                         if (response.records != null) {
                             apiRepository.insertSabjiList(response.records!!)
                                 .subscribe(object : NetworkObserver<Void>() {
@@ -81,20 +82,24 @@ class ScrollingViewModelImpl @Inject constructor(private val apiRepository: ApiR
                         throwable: Throwable
                     ) {
                         _message.value = errorMessage
+                        _loader.value = false
                     }
                 })
 
         } else {
             _message.value = "Internet is not available.."
+            _loader.value = false
         }
     }
 
     override fun getSabjiMandiList() {
+        _loader.value = true
         apiRepository.getSabjiList()
             .subscribe(object : NetworkObserver<List<SabjiMandiDto.Record>>() {
                 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
                 override fun onSucceed(response: List<SabjiMandiDto.Record>) {
                     _sabjiMandiList.value = response
+                    _loader.value = false
                 }
 
                 override fun onFailure(
@@ -104,16 +109,19 @@ class ScrollingViewModelImpl @Inject constructor(private val apiRepository: ApiR
                     throwable: Throwable
                 ) {
                     _message.value = errorMessage
+                    _loader.value = false
                 }
             })
     }
 
     override fun getLocationList() {
+        _loader.value = true
         apiRepository.getLocationList()
             .subscribe(object : NetworkObserver<List<String>>() {
                 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
                 override fun onSucceed(response: List<String>) {
                     _locationList.value = response
+                    _loader.value = false
                 }
 
                 override fun onFailure(
@@ -123,6 +131,7 @@ class ScrollingViewModelImpl @Inject constructor(private val apiRepository: ApiR
                     throwable: Throwable
                 ) {
                     _message.value = errorMessage
+                    _loader.value = false
                 }
             })
 

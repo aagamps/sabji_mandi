@@ -79,15 +79,8 @@ class SabjiAdapter : BaseRecyclerViewAdapter() {
                 else tvDateOfArrival.text = "--"
 
                 if (!viewItem.record.market.isNullOrEmpty()) tvMarketName.text =
-                    viewItem.record.market + " " + "Market"
+                    viewItem.record.market.toString() + " Market"
                 else tvMarketName.text = "--"
-
-//                val district = viewItem.record.district
-//                val state = viewItem.record.state
-//
-//                if (!district.isNullOrEmpty() && !state.isNullOrEmpty()) {
-//                    tvLocation.text = "$district, $state"
-//                }
 
                 if (!viewItem.record.location.isNullOrEmpty()) {
                     tvLocation.text = viewItem.record.location
