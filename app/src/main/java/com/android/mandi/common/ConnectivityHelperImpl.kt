@@ -1,6 +1,5 @@
 package com.android.mandi.common
 
-import ConnectivityHelper
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build

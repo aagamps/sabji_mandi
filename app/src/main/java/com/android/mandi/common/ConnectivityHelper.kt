@@ -1,3 +1,4 @@
+package com.android.mandi.common
 
 /**
  * Contract to be implemented by the ConnectivityManager
