@@ -1,14 +1,13 @@
 package com.android.mandi.common
 
+import ConnectivityHelper
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import com.kredily.app.dependency.common.ConnectivityHelper
 import javax.inject.Inject
 
 /**
  * Helper class to get status of mobile device connectivity
- * This class implements the contract specified by [com.kredily.app.dependency.common.ConnectivityHelper]
  *
  * @author Ketan Patel
  */

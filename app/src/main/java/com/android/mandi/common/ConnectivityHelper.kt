@@ -1,4 +1,3 @@
-package com.kredily.app.dependency.common
 
 /**
  * Contract to be implemented by the ConnectivityManager
