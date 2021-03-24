@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "sabji_mandi"
+rootProject.name = "property_match"

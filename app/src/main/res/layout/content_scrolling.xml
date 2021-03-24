@@ -17,7 +17,7 @@
             android:visibility="visible">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@id/rvSabjiList"
+                android:id="@id/rvFacilityList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingTop="@dimen/_140sdp"
