@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.android.mandi.R
+import com.android.mandi.dto.PropertyMatchDto
 import kotlin.properties.Delegates
 
 abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<BaseRecyclerViewAdapter.ViewHolder>(),
@@ -64,7 +65,7 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<BaseRecyclerViewAd
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val viewItem = recyclerViewItems[position]
-        holder.onBindViewHolder(viewItem, this,this)
+        holder.onBindViewHolder(viewItem, this, this)
     }
 
     override fun getItemCount(): Int {

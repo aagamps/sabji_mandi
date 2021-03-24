@@ -2,11 +2,8 @@ package com.android.mandi.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import com.google.android.material.appbar.CollapsingToolbarLayout
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,17 +11,14 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.mandi.R
-import com.android.mandi.adapters.LocationAdapter
-import com.android.mandi.adapters.SabjiAdapter
-import com.android.mandi.dto.SabjiMandiDto
+import com.android.mandi.adapters.PropertyAdapter
+import com.android.mandi.dto.PropertyMatchDto
 import com.android.mandi.model.ScrollingModel
 import com.android.mandi.viewModel.ScrollingViewModel
 import com.android.mandi.viewModel.ScrollingViewModelImpl
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_scrolling.*
 import kotlinx.android.synthetic.main.content_scrolling.*
-import kotlinx.android.synthetic.main.layout_filter_bottomsheet.*
-import java.time.Duration
 import javax.inject.Inject
 
 
@@ -34,29 +28,24 @@ class ScrollingActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefres
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var viewModel: ScrollingViewModel
-    private lateinit var adapter: SabjiAdapter
-    private lateinit var adapterLocation: LocationAdapter
+    private lateinit var adapter: PropertyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scrolling)
         getAssociatedViewModel()
 
-        adapter = SabjiAdapter()
-        adapterLocation = LocationAdapter()
+        adapter = PropertyAdapter(this,viewModel)
 
         setUpRecyclerView()
         swipeToRefreshView.setOnRefreshListener(this)
-        swipeToRefreshView.post {
-            onRefresh()
-        }
-        ivFliter.setOnClickListener {
-            Toast.makeText(this, "Coming Soon...", Toast.LENGTH_SHORT)
-        }
         viewModel.showMessage().observe(this, messageObserver)
         viewModel.showHideLoader().observe(this, loaderObserver)
-        viewModel.showSabjiMadidata().observe(this, sabjiMandiDataObserver)
-//        viewModel.showLocationList().observe(this, locationListObserver)                           // Created for Location List
+        viewModel.showPoetryLiveData().observe(this, propertyLiveDataObserver)
+        viewModel.showPropertyOptionsData().observe(this, propertyOptionsObserver)
+        viewModel.getFacilityList()
+        viewModel.getOptionsList()
+        viewModel.getExclusionsList()
 
     }
 
@@ -79,42 +68,35 @@ class ScrollingActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefres
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rvSabjiList.adapter = adapter
         ViewCompat.setNestedScrollingEnabled(rvSabjiList, false)
-
-//        rvLocation.setHasFixedSize(true)                                                          // Created for Location List
-//        rvLocation.layoutManager =
-//            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-//        rvLocation.adapter = adapterLocation
-//        ViewCompat.setNestedScrollingEnabled(rvLocation, false)
     }
 
-    private val sabjiMandiDataObserver = Observer<SabjiMandiDto.Response> { response ->
+    private val propertyLiveDataObserver = Observer<PropertyMatchDto.Response> { response ->
+        viewModel.getOptionsList()
+    }
 
-        val recordsList = response.records
-        if (recordsList != null) {
-            for ((index, meeting) in recordsList.withIndex()) {
-                meeting.location = "${meeting.district}, ${meeting.state}"
-                val taskItem = SabjiAdapter.SabjiRecord(index.toLong(), meeting)
+    private val propertyOptionsObserver =
+        Observer<List<PropertyMatchDto.OptionsObj>> {
+            generateList()
+        }
+
+    private fun generateList() {
+        adapter.clear()
+        val facilityList = viewModel.getBoundModel()?.facilityList
+        val propertyList = viewModel.getBoundModel()?.optionsList
+        if (facilityList != null && facilityList.isNotEmpty() && propertyList != null && propertyList.isNotEmpty()) {
+            for ((index, facility) in facilityList.withIndex()) {
+                for (optionObj in propertyList) {
+                    if (facility.facilityId == optionObj.facilityId) {
+                        facility.options.add(optionObj)
+                    }
+                }
+                val taskItem = PropertyAdapter.FacilityRecord(index.toLong(), facility)
                 adapter.addRecyclerViewItem(taskItem)
             }
             adapter.notifyDataSetChanged()
+        } else {
+            viewModel.getPropertyLiveData()
         }
-//        viewModel.getLocationList()                                                               // Created for Location List
-        tvError.visibility = View.GONE
-        swipeToRefreshView.isRefreshing = false
-    }
-
-    private val locationListObserver = Observer<List<String>> { locationList ->
-
-        if (locationList != null) {
-            for ((index, name) in locationList.withIndex()) {
-                val location = SabjiMandiDto.Location(name = name, isSelected = false)
-                val taskItem = LocationAdapter.LocationRecord(index.toLong(), location)
-                adapterLocation.addRecyclerViewItem(taskItem)
-            }
-            adapterLocation.notifyDataSetChanged()
-        }
-//        viewModel.getLocationList()                                                               // Created for Location List
-        swipeToRefreshView.isRefreshing = false
     }
 
     @SuppressLint("ShowToast")
@@ -128,8 +110,10 @@ class ScrollingActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefres
     }
 
     override fun onRefresh() {
-        viewModel.getSabjiMandiNetworkData()
-//        viewModel.getLocationList()                                                               // Created for Location List
+        viewModel.getPropertyLiveData()
+        viewModel.getFacilityList()
+        viewModel.getOptionsList()
+        viewModel.getExclusionsList()
     }
 
 }

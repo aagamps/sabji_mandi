@@ -13,4 +13,6 @@
     <color name="darkGray">#8C202843</color>
     <color name="transparent">#00000000</color>
     <color name="errorRed">#b20000</color>
+    <color name="light_orange">#fae5df</color>
+    <color name="dark_orange">#cb6649</color>
 </resources>

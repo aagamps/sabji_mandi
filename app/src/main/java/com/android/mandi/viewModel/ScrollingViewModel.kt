@@ -1,6 +1,7 @@
 package com.android.mandi.viewModel
 
 import androidx.lifecycle.LiveData
+import com.android.mandi.dto.PropertyMatchDto
 import com.android.mandi.dto.SabjiMandiDto
 import com.android.mandi.model.ScrollingModel
 
@@ -16,13 +17,16 @@ interface ScrollingViewModel {
 
     fun showHideLoaderWithProgress(): LiveData<Boolean>
 
-    fun getSabjiMandiNetworkData()
-    fun showSabjiMadidata(): LiveData<SabjiMandiDto.Response>
+    fun getPropertyLiveData()
+    fun showPoetryLiveData(): LiveData<PropertyMatchDto.Response>
 
-    fun getSabjiMandiList()
-    fun showSabjiMadiList(): LiveData<List<SabjiMandiDto.Record>>
+    fun getFacilityList()
+    fun showPropertyFacilityData(): LiveData<List<PropertyMatchDto.FacilitiesObj>>
 
-    fun getLocationList()
-    fun showLocationList(): LiveData<List<String>>
+    fun getOptionsList()
+    fun showPropertyOptionsData(): LiveData<List<PropertyMatchDto.OptionsObj>>
+
+    fun getExclusionsList()
+    fun showPropertyExclusionsData(): LiveData<List<PropertyMatchDto.ExclusionsObj>>
 
 }

@@ -31,4 +31,5 @@
     <item name="cbLocation" type="id" />
     <item name="ivFliter" type="id" />
     <item name="tvError" type="id" />
+    <item name="chipGroup" type="id" />
 </resources>
