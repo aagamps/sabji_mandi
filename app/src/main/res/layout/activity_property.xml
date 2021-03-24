@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
-
         <variable
             name="viewModel"
             type="com.android.mandi.viewModel.ScrollingViewModelImpl" />
@@ -50,15 +47,6 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_30ssp" />
 
-            <ImageView
-                android:id="@id/ivFliter"
-                android:layout_width="@dimen/_23sdp"
-                android:layout_height="@dimen/_23sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="@dimen/_30sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:visibility="gone"
-                android:src="@drawable/ic_filter_symbol" />
         </RelativeLayout>
 
         <include layout="@layout/content_scrolling" />

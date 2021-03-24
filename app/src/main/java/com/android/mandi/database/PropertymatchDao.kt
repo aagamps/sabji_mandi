@@ -11,7 +11,7 @@ import com.android.mandi.constants.TABLE_SABJI_VERIATY
 import com.android.mandi.dto.PropertyMatchDto
 
 @Dao
-interface SabjiMandiDao {
+interface PropertymatchDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertFacilityList(records: List<PropertyMatchDto.FacilitiesObj>)

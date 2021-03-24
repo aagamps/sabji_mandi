@@ -9,7 +9,7 @@ import androidx.room.Room
 import com.android.mandi.constants.DB_NAME
 import com.android.mandi.database.DbService
 import com.android.mandi.database.DbServiceImpl
-import com.android.mandi.database.SabjiMandiDatabase
+import com.android.mandi.database.PropertyMatchDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -34,11 +34,11 @@ class ManagerModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(application: Application): SabjiMandiDatabase =
-        Room.databaseBuilder(application, SabjiMandiDatabase::class.java, DB_NAME).build()
+    fun provideDatabase(application: Application): PropertyMatchDatabase =
+        Room.databaseBuilder(application, PropertyMatchDatabase::class.java, DB_NAME).build()
 
     @Provides
     @Singleton
-    fun provideDatabaseService(database: SabjiMandiDatabase): DbService = DbServiceImpl(database)
+    fun provideDatabaseService(database: PropertyMatchDatabase): DbService = DbServiceImpl(database)
 
 }

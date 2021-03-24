@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingTop="@dimen/_140sdp"
-                tools:listitem="@layout/list_item_sabji_list" />
+                tools:listitem="@layout/list_item_facility_list" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

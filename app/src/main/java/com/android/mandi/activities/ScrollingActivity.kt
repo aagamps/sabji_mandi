@@ -19,7 +19,7 @@ import com.android.mandi.model.ScrollingModel
 import com.android.mandi.viewModel.ScrollingViewModel
 import com.android.mandi.viewModel.ScrollingViewModelImpl
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.activity_scrolling.*
+import kotlinx.android.synthetic.main.activity_property.*
 import kotlinx.android.synthetic.main.content_scrolling.*
 import javax.inject.Inject
 
@@ -35,7 +35,7 @@ class ScrollingActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefres
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_scrolling)
+        setContentView(R.layout.activity_property)
         getAssociatedViewModel()
 
         swipeToRefreshView.setOnRefreshListener(this)

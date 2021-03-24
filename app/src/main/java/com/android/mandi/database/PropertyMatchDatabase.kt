@@ -12,8 +12,8 @@ import com.android.mandi.dto.PropertyMatchDto
     exportSchema = false
 )
 
-abstract class SabjiMandiDatabase : RoomDatabase() {
+abstract class PropertyMatchDatabase : RoomDatabase() {
 
-    abstract fun sabjiMandiDao(): SabjiMandiDao
+    abstract fun sabjiMandiDao(): PropertymatchDao
 
 }

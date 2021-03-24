@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="MandiCard" parent="Widget.MaterialComponents.CardView">
+    <style name="PropertyCard" parent="Widget.MaterialComponents.CardView">
         <item name="cardBackgroundColor">@color/white</item>
         <item name="cardCornerRadius">4dp</item>
         <item name="cardElevation">7dp</item>

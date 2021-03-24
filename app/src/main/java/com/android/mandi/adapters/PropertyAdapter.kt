@@ -1,18 +1,12 @@
 package com.android.mandi.adapters
 
 
-import android.app.Activity
-import android.content.Context
 import android.graphics.drawable.Drawable
-import android.util.Property
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.content.ContextCompat
-import androidx.core.view.size
 import com.android.mandi.PropertyInterface
 import com.android.mandi.R
 import com.android.mandi.dto.PropertyMatchDto
@@ -36,7 +30,7 @@ class PropertyAdapter constructor(
         return when (viewType) {
             LIST_ITEM -> MeetViewHolder(
                 inflater.inflate(
-                    R.layout.list_item_sabji_list,
+                    R.layout.list_item_facility_list,
                     parent,
                     false
                 )

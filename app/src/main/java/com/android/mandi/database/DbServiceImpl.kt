@@ -4,7 +4,7 @@ import com.android.mandi.dto.PropertyMatchDto
 import io.reactivex.Completable
 import io.reactivex.Single
 
-class DbServiceImpl constructor(database: SabjiMandiDatabase) : DbService {
+class DbServiceImpl constructor(database: PropertyMatchDatabase) : DbService {
 
     private val dao = database.sabjiMandiDao()
 
