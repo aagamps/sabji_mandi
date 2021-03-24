@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.core.view.ViewCompat
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.android.mandi.PropertyInterface
 import com.android.mandi.R
 import com.android.mandi.adapters.PropertyAdapter
 import com.android.mandi.dto.PropertyMatchDto
@@ -22,7 +24,8 @@ import kotlinx.android.synthetic.main.content_scrolling.*
 import javax.inject.Inject
 
 
-class ScrollingActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
+class ScrollingActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefreshListener,
+    PropertyInterface {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -35,9 +38,6 @@ class ScrollingActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefres
         setContentView(R.layout.activity_scrolling)
         getAssociatedViewModel()
 
-        adapter = PropertyAdapter(viewModel)
-
-        setUpRecyclerView()
         swipeToRefreshView.setOnRefreshListener(this)
         viewModel.showMessage().observe(this, messageObserver)
         viewModel.showHideLoader().observe(this, loaderObserver)
@@ -79,12 +79,15 @@ class ScrollingActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefres
             generateList()
         }
 
-    private fun generateList() {
+    override fun generateList() {
+        adapter = PropertyAdapter(viewModel, this)
+        setUpRecyclerView()
         adapter.clear()
         val facilityList = viewModel.getBoundModel()?.facilityList
         val propertyList = viewModel.getBoundModel()?.optionsList
         if (facilityList != null && facilityList.isNotEmpty() && propertyList != null && propertyList.isNotEmpty()) {
             for ((index, facility) in facilityList.withIndex()) {
+                facility.options = ArrayList()
                 for (optionObj in propertyList) {
                     if (facility.facilityId == optionObj.facilityId) {
                         facility.options.add(optionObj)
@@ -93,7 +96,6 @@ class ScrollingActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefres
                 val taskItem = PropertyAdapter.FacilityRecord(index.toLong(), facility)
                 adapter.addRecyclerViewItem(taskItem)
             }
-            adapter.notifyDataSetChanged()
         } else {
             viewModel.getPropertyLiveData()
         }

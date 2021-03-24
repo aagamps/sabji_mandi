@@ -31,7 +31,8 @@ object PropertyMatchDto {
         @SerializedName("name") var name: String? = null,
         @SerializedName("icon") var icon: String? = null,
         @SerializedName("id") var optionsIId: String? = null,
-        @Ignore var isEnabled: Boolean = true
+        @Ignore var isEnabled: Boolean = true,
+        @Ignore var isChecked: Boolean = false
     )
 
     @Entity(tableName = TABLE_EXCLUSIONS)

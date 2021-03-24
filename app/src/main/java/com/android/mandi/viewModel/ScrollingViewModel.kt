@@ -2,7 +2,6 @@ package com.android.mandi.viewModel
 
 import androidx.lifecycle.LiveData
 import com.android.mandi.dto.PropertyMatchDto
-import com.android.mandi.dto.SabjiMandiDto
 import com.android.mandi.model.ScrollingModel
 
 interface ScrollingViewModel {

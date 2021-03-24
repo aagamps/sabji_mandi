@@ -1,25 +1,12 @@
 package com.android.mandi.database
 
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import com.android.mandi.constants.TABLE_EXCLUSIONS
-import com.android.mandi.constants.TABLE_OPTION
 import com.android.mandi.dto.PropertyMatchDto
-import com.android.mandi.dto.SabjiMandiDto
 import io.reactivex.Completable
 import io.reactivex.Single
 
 interface DbService {
 
-    fun insertSabjiList(records: List<SabjiMandiDto.Record>): Completable
-
-    fun getSabjiList(): Single<List<SabjiMandiDto.Record>>
-
     fun deleteAll(): Completable
-
-    fun getLocationList(): Single<List<String>>
-
 
     fun insertFacilityList(records: List<PropertyMatchDto.FacilitiesObj>): Completable
 

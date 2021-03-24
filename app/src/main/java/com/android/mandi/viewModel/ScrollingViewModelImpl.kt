@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.mandi.apiServices.ApiRepository
 import com.android.mandi.dto.PropertyMatchDto
-import com.android.mandi.dto.SabjiMandiDto
 import com.android.mandi.model.ScrollingModel
 import javax.inject.Inject
 
@@ -15,7 +14,7 @@ class ScrollingViewModelImpl @Inject constructor(private val apiRepository: ApiR
 
     var scrollingModel: ScrollingModel? = null
     override fun bindModel(model: ScrollingModel) {
-        this.scrollingModel = model
+       scrollingModel = model
     }
 
     override fun getBoundModel(): ScrollingModel? {

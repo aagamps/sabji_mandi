@@ -1,7 +1,6 @@
 package com.android.mandi.apiServices
 
 import com.android.mandi.dto.PropertyMatchDto
-import com.android.mandi.dto.SabjiMandiDto
 import io.reactivex.Single
 import retrofit2.http.GET
 

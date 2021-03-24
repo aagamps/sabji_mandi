@@ -4,6 +4,7 @@ package com.android.mandi.adapters
 import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.util.Property
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.view.size
+import com.android.mandi.PropertyInterface
 import com.android.mandi.R
 import com.android.mandi.dto.PropertyMatchDto
 import com.android.mandi.viewModel.ScrollingViewModel
@@ -20,7 +22,8 @@ import com.google.android.material.chip.ChipGroup
 
 
 class PropertyAdapter constructor(
-    private val viewModel: ScrollingViewModel
+    private val viewModel: ScrollingViewModel,
+    private val propertyInterface: PropertyInterface
 ) :
     BaseRecyclerViewAdapter() {
 
@@ -56,30 +59,29 @@ class PropertyAdapter constructor(
             val context = itemView.context
             if (viewItem is FacilityRecord) {
                 tvVarietyName.text = viewItem.record.name
-                if (chipGroup.size == 0) {
-                    for (chipObj in viewItem.record.options) {
-                        val icon = chipObj.icon!!.replace("-", "_")
-                        val uri = "@drawable/${icon}"
-                        val imageResource: Int =
-                            context.resources.getIdentifier(uri, null, context.packageName)
-                        val res: Drawable = context.resources.getDrawable(imageResource)
-                        val chip = Chip(context)
-                        chip.textSize = 17f
-                        chip.chipStartPadding = 20f
-                        chip.chipEndPadding = 20f
-                        chip.text = chipObj.name
-                        chip.chipIcon = res
-                        chip.isCheckable = true
-                        chip.checkedIcon = null
-                        chip.id = chipObj.optionsIId!!.toInt()
-                        chip.chipBackgroundColor =
-                            AppCompatResources.getColorStateList(
-                                context,
-                                R.color.background_chip_state
-                            )
-                        chip.isEnabled = chipObj.isEnabled
-                        chipGroup.addView(chip)
-                    }
+                for (chipObj in viewItem.record.options) {
+                    val icon = chipObj.icon!!.replace("-", "_")
+                    val uri = "@drawable/${icon}"
+                    val imageResource: Int =
+                        context.resources.getIdentifier(uri, null, context.packageName)
+                    val res: Drawable = context.resources.getDrawable(imageResource)
+                    val chip = Chip(context)
+                    chip.textSize = 17f
+                    chip.chipStartPadding = 20f
+                    chip.chipEndPadding = 20f
+                    chip.text = chipObj.name
+                    chip.chipIcon = res
+                    chip.isCheckable = true
+                    chip.checkedIcon = null
+                    chip.id = chipObj.optionsIId!!.toInt()
+                    chip.chipBackgroundColor =
+                        AppCompatResources.getColorStateList(
+                            context,
+                            R.color.background_chip_state
+                        )
+                    chip.isEnabled = chipObj.isEnabled
+                    chip.isChecked = chipObj.isChecked
+                    chipGroup.addView(chip)
                 }
 
                 chipGroup.setOnCheckedChangeListener() { _: ChipGroup, optionId: Int ->
@@ -100,7 +102,10 @@ class PropertyAdapter constructor(
                     }
                     for (optionsObj in optionsList) {
                         optionsObj.isEnabled = optionsObj.optionsIId !in optionIdsToBeDisabled
+                        optionsObj.isChecked = optionsObj.optionsIId == optionId.toString()
                     }
+                    viewModel.getBoundModel()?.optionsList = optionsList
+                    propertyInterface.generateList()
                 }
             }
         }
