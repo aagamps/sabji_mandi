@@ -35,7 +35,7 @@ class ScrollingActivity : DaggerAppCompatActivity(), SwipeRefreshLayout.OnRefres
         setContentView(R.layout.activity_scrolling)
         getAssociatedViewModel()
 
-        adapter = PropertyAdapter(this,viewModel)
+        adapter = PropertyAdapter(viewModel)
 
         setUpRecyclerView()
         swipeToRefreshView.setOnRefreshListener(this)

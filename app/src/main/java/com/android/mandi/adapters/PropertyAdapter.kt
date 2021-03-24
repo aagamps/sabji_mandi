@@ -20,7 +20,6 @@ import com.google.android.material.chip.ChipGroup
 
 
 class PropertyAdapter constructor(
-    private val con: Activity,
     private val viewModel: ScrollingViewModel
 ) :
     BaseRecyclerViewAdapter() {
